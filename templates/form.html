@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Tambah' if mode == 'tambah' else 'Ubah' }} mahasiswa{% endblock %}
+{% block content %}
+<header class="page-head">
+  <div>
+    <h1>{{ 'Tambah mahasiswa' if mode == 'tambah' else 'Ubah data mahasiswa' }}</h1>
+    <p class="muted">Semua isian wajib diisi. IPK harus di antara 0.00 dan 4.00.</p>
+  </div>
+</header>
+
+<section class="panel form-panel">
+  <form method="post" novalidate>
+    <label>NIM
+      <input type="text" name="nim" inputmode="numeric" value="{{ mhs.get('nim', '') }}"
+             {{ 'readonly' if mode == 'edit' }} placeholder="Contoh: 12010124140001">
+      {% if mode == 'edit' %}<small class="muted">NIM tidak dapat diubah.</small>{% endif %}
+    </label>
+    <label>Nama
+      <input type="text" name="nama" value="{{ mhs.get('nama', '') }}" placeholder="Nama lengkap">
+    </label>
+    <label>Program studi
+      <input type="text" name="program_studi" list="daftar-prodi" value="{{ mhs.get('program_studi', '') }}" placeholder="Contoh: Bisnis Digital">
+      <datalist id="daftar-prodi">
+        <option value="Bisnis Digital"><option value="Manajemen"><option value="Akuntansi">
+        <option value="Ekonomi Pembangunan"><option value="Ekonomi Islam"><option value="Informatika">
+      </datalist>
+    </label>
+    <div class="row">
+      <label>Angkatan
+        <input type="text" name="angkatan" inputmode="numeric" value="{{ mhs.get('angkatan', '') }}" placeholder="2024">
+      </label>
+      <label>IPK
+        <input type="text" name="ipk" inputmode="decimal" value="{{ mhs.get('ipk', '') }}" placeholder="3.75">
+      </label>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-gold" type="submit">Simpan</button>
+      <a class="btn btn-ghost" href="{{ url_for('mahasiswa_bp.index') }}">Batal</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

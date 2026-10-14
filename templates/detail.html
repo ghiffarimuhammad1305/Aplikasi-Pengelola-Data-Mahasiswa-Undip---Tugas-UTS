@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{{ mhs.nama }}{% endblock %}
+{% block content %}
+<header class="page-head">
+  <div>
+    <h1>{{ mhs.nama }}</h1>
+    <p class="muted">NIM {{ mhs.nim }}</p>
+  </div>
+  <div class="head-actions">
+    <a class="btn btn-gold" href="{{ url_for('mahasiswa_bp.edit', nim=mhs.nim) }}">Ubah data</a>
+    <a class="btn btn-ghost" href="{{ url_for('mahasiswa_bp.index') }}">Kembali</a>
+  </div>
+</header>
+<section class="panel">
+  <dl class="detail">
+    <div><dt>Program studi</dt><dd>{{ mhs.program_studi }}</dd></div>
+    <div><dt>Angkatan</dt><dd>{{ mhs.angkatan }}</dd></div>
+    <div><dt>IPK</dt><dd>{{ '%.2f'|format(mhs.ipk) }}</dd></div>
+    <div><dt>Lama studi</dt><dd>{{ mhs.lama_studi }} tahun</dd></div>
+  </dl>
+</section>
+{% endblock %}

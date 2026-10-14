@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Tidak ditemukan{% endblock %}
+{% block content %}
+<section class="panel">
+  <h1>Data tidak ditemukan</h1>
+  <p class="muted">Mahasiswa atau halaman yang kamu cari tidak ada.</p>
+  <a class="btn btn-navy" href="{{ url_for('mahasiswa_bp.index') }}">Kembali ke dashboard</a>
+</section>
+{% endblock %}

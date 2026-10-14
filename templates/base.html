@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Data Mahasiswa{% endblock %} - Undip</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="{{ url_for('mahasiswa_bp.index') }}">
+      <!-- Letakkan logo resmi di static/img/logo-undip.png; jika belum ada, logo sementara dipakai -->
+      <img src="{{ url_for('static', filename='img/logo-undip.png') }}"
+           onerror="this.onerror=null;this.src='{{ url_for('static', filename='img/logo-undip-placeholder.svg') }}'"
+           alt="Logo Universitas Diponegoro" width="64" height="64">
+      <span class="brand-text">
+        <strong>Universitas Diponegoro</strong>
+        <small>Departemen Bisnis Digital</small>
+      </span>
+    </a>
+    <nav>
+      <a href="{{ url_for('mahasiswa_bp.index') }}" class="{{ 'active' if request.endpoint == 'mahasiswa_bp.index' }}">Dashboard</a>
+      <a href="{{ url_for('mahasiswa_bp.tambah') }}" class="{{ 'active' if request.endpoint == 'mahasiswa_bp.tambah' }}">Tambah mahasiswa</a>
+      <a href="{{ url_for('mahasiswa_bp.api_list') }}" target="_blank" rel="noopener">Data JSON</a>
+    </nav>
+    <p class="sidebar-foot">Lab Pemrograman, UTS 2026/2027</p>
+  </aside>
+
+  <main class="content">
+    {% with pesan = get_flashed_messages(with_categories=true) %}
+      {% if pesan %}
+        <div class="flashes" role="status">
+          {% for kategori, isi in pesan %}
+            <div class="flash {{ kategori }}">{{ isi }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>
